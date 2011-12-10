@@ -1,0 +1,9 @@
+<h1>{_"Blog module"}</h1>
+
+<ul class="toolbar">
+
+	<li n:if="$presenter->isAllowed('Default:default')">
+		<a href="{plink Default:default}"{if $presenter->isLinkCurrent("Default:*")} class="active"{/if}>categories</a>
+	</li>
+
+</ul>
