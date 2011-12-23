@@ -22,7 +22,6 @@ class DefaultPresenter extends \Venne\Application\UI\AdminPresenter {
 	{
 		parent::startup();
 		$this->addPath("Blog", $this->link(":Blog:Admin:Default:"));
-		\Nette\Config\NeonAdapter::save(array("key" => array("a" => "b", "c" => "d"), "key2" => array(), "key4" => "ppp", "key3" => array("a" => "b", "c" => "d")), $this->context->params["tempDir"] . "/test.neon");
 	}
 
 
@@ -45,9 +44,9 @@ class DefaultPresenter extends \Venne\Application\UI\AdminPresenter {
 	{
 		$repository = $this->context->blogCategoryRepository;
 		$entity = $this->context->blogCategoryRepository->createNew();
-		$em = $this->context->doctrineContainer->entityManager;
+		$em = $this->context->entityManager;
 		
-		$form = new \App\BlogModule\CategoryForm($entity, $this->context->doctrineContainer->entityFormMapper, $em);
+		$form = new \App\BlogModule\CategoryForm($this->context->entityFormMapper, $em, $entity);
 		$form->setSuccessLink("default");
 		$form->setFlashMessage("Page has been created");
 		$form->setSubmitLabel("Create");
@@ -63,9 +62,9 @@ class DefaultPresenter extends \Venne\Application\UI\AdminPresenter {
 	{
 		$repository = $this->context->blogCategoryRepository;
 		$entity = $this->context->blogCategoryRepository->find($this->id);
-		$em = $this->context->doctrineContainer->entityManager;
+		$em = $this->context->entityManager;
 		
-		$form = new \App\BlogModule\CategoryForm($entity, $this->context->doctrineContainer->entityFormMapper, $em);
+		$form = new \App\BlogModule\CategoryForm($this->context->entityFormMapper, $em, $entity);
 		$form->setSuccessLink("this");
 		$form->setFlashMessage("Page has been updated");
 		//$form->setSubmitLabel("Update");

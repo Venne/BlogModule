@@ -12,11 +12,12 @@
 namespace App\BlogModule;
 
 use \App\CoreModule\NavigationEntity;
+use Nette\DI\ContainerBuilder;
 
 /**
  * @author Josef Kříž
  */
-class Module extends \App\PagesModule\Module {
+class Module extends \Venne\Module\AutoModule {
 
 
 
@@ -48,31 +49,41 @@ class Module extends \App\PagesModule\Module {
 		);
 	}
 
+	
+	public function loadConfiguration(ContainerBuilder $container, array $config)
+	{
+		$container->addDefinition("blogRepository")
+				->setClass("Venne\Doctrine\ORM\BaseRepository")
+				->setFactory("@entityManager::getRepository", array("\\App\\BlogModule\\BlogEntity"))
+				->addTag("repository")
+				->setAutowired(false);
+		
+		$container->addDefinition("blogCategoryRepository")
+				->setClass("Venne\Doctrine\ORM\BaseRepository")
+				->setFactory("@entityManager::getRepository", array("\\App\\BlogModule\\CategoryEntity"))
+				->addTag("repository")
+				->setAutowired(false);
+		
+		$container->addDefinition("blogListRepository")
+				->setClass("Venne\Doctrine\ORM\BaseRepository")
+				->setFactory("@entityManager::getRepository", array("\\App\\BlogModule\\ListEntity"))
+				->addTag("repository")
+				->setAutowired(false);
+	}
 
 
-	public function configure(\Venne\DI\Container $container, \App\CoreModule\CmsManager $manager)
+	public function configure(\Nette\DI\Container $container, \App\CoreModule\CmsManager $manager)
 	{
 		parent::configure($container, $manager);
 
-		$manager->addRepository("blog", function() use ($container) {
-					return $container->doctrineContainer->getRepository("\\App\\BlogModule\\BlogEntity");
-				});
-		$manager->addRepository("blogCategory", function() use ($container) {
-					return $container->doctrineContainer->getRepository("\\App\\BlogModule\\CategoryEntity");
-				});
-		$manager->addRepository("blogList", function() use ($container) {
-					return $container->doctrineContainer->getRepository("\\App\\BlogModule\\ListEntity");
-				});
-
-
 		$manager->addContentType(BlogEntity::LINK, "blog entry", array("url"), function($entity) use($container) {
-					return new BlogForm($entity, $container->doctrineContainer->entityFormMapper, $container->doctrineContainer->entityManager);
+					return new BlogForm($container->entityFormMapper, $container->entityManager, $entity);
 				}, function() use ($container) {
 					return $container->blogRepository->createNew();
 				});
 				
 		$manager->addContentType(ListEntity::LINK, "blog list", array("url"), function($entity) use($container) {
-					return new ListForm($entity, $container->doctrineContainer->entityFormMapper, $container->doctrineContainer->entityManager);
+					return new ListForm($container->entityFormMapper, $container->entityManager, $entity);
 				}, function() use ($container) {
 					return $container->blogListRepository->createNew();
 				});

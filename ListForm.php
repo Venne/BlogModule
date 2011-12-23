@@ -18,7 +18,7 @@ use Venne\Forms\Form;
 /**
  * @author Josef Kříž
  */
-class ListForm extends \App\PagesModule\PagesForm {
+class ListForm extends \Venne\Forms\PageForm {
 
 
 
@@ -40,6 +40,7 @@ class ListForm extends \App\PagesModule\PagesForm {
 		$arr = parent::getParams();
 		$arr["module"] = "Blog";
 		$arr["presenter"] = "List";
+		$arr["url"] = isset($this->entity->localUrl) ? $this->entity->localUrl : NULL;
 		return $arr;
 	}
 

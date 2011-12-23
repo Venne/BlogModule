@@ -1,11 +1,11 @@
 <ul class="menu">
 
-	<li n:if="$presenter->isAllowed('Blog:Admin:Categories:default')">
-		<a href="{link default}"{if $presenter->isLinkCurrent("Categories:default")} class="active"{/if}>list</a>
+	<li n:if="$presenter->isAllowed('Default:default')">
+		<a href="{link default}"{if $presenter->isLinkCurrent("Default:default")} class="active"{/if}>list</a>
 	</li>
 
-	<li n:if="$presenter->isAllowed('Blog:Admin:Categories:create')">
-		<a href="{link create}"{if $presenter->isLinkCurrent("Categories:create")} class="active"{/if}>new item</a>
+	<li n:if="$presenter->isAllowed('Default:create')">
+		<a href="{link create}"{if $presenter->isLinkCurrent("Default:create")} class="active"{/if}>new item</a>
 	</li>
 
 </ul>

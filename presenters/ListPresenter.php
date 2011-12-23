@@ -15,32 +15,6 @@ class ListPresenter extends \Venne\Application\UI\PagePresenter {
 	/** @var ListEntity */
 	protected $entity;
 
-	/**
-	 * @inject blogListRepository
-	 * @var \Venne\Doctrine\ORM\BaseRepository
-	 */
-	protected $repository;
-
-	/**
-	 * @inject blogRepository
-	 * @var \Venne\Doctrine\ORM\BaseRepository
-	 */
-	protected $blogRepository;
-
-
-
-	public function setRepository($repository)
-	{
-		$this->repository = $repository;
-	}
-
-
-
-	public function setBlogRepository($repository)
-	{
-		$this->blogRepository = $repository;
-	}
-
 
 
 	/**
@@ -50,20 +24,20 @@ class ListPresenter extends \Venne\Application\UI\PagePresenter {
 	{
 		parent::startup();
 
-		$this->entity = $this->repository->findOneBy(array("page" => $this->page->id));
+		$this->entity = $this->context->blogListRepository->findOneBy(array("page" => $this->page->id));
 	}
 
 
 
 	public function actionDefault()
 	{
-		$query = $this->blogRepository->createQueryBuilder("a")
+		$query = $this->context->blogRepository->createQueryBuilder("a")
 				->leftJoin("a.categories", "p")
 				->setMaxResults($this->entity->itemsPerPage)
 				->orderBy("a.created", "DESC");
 		$i = false;
 		foreach ($this->entity->categories as $category) {
-			if(!$i){
+			if (!$i) {
 				$i = true;
 				$query = $query->where("p.id = :cat" . $category->id)->setParameter("cat" . $category->id, $category->id);
 			}

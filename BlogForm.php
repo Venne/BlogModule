@@ -32,7 +32,7 @@ class BlogForm extends \App\PagesModule\PagesForm {
 		parent::startup();
 
 		unset($this["mainPage"]);
-		$this["url"]->setRequired("Enter url");
+		$this["localUrl"]->setRequired("Enter url");
 	}
 
 

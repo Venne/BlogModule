@@ -22,7 +22,7 @@ namespace App\BlogModule;
  * @property $updated
  * @property $url
  */
-class ListEntity extends \App\PagesModule\BaseEntity {
+class ListEntity extends \App\CoreModule\BasePageEntity {
 
 
 	const LINK = "Blog:List:default";
@@ -43,6 +43,7 @@ class ListEntity extends \App\PagesModule\BaseEntity {
 
 	public function __construct()
 	{
+		parent::__construct();
 		$this->itemsPerPage = 10;
 	}
 
