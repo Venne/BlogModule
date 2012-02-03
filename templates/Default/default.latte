@@ -1,7 +1,18 @@
 {block content}
 
 {if !$presenter->isModeModule()}
-{!$entity->text}
+	{if $presenter->context->parameters["modules"]["blog"]["showNotationOnPage"]}
+		{if $presenter->context->parameters["modules"]["blog"]["notationInHtml"]}
+			{!$item->notation}
+		{else}
+			{$item->notation}
+		{/if}
+	{/if}
+
+	{var text=>$entity->text}
+    {var text=>str_replace('src="{$basePath}', 'src="'.$basePath, $text)}
+    {var text=>str_replace('href="{$basePath}', 'href="'.$basePath, $text)}
+    {!$text}
 {else}
 
 {js /ckeditor/ckeditor.js}

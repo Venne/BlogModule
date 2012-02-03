@@ -19,7 +19,11 @@
 </ul>
 
 <p>
-	{$item->notation}
+	{if $presenter->context->parameters["modules"]["blog"]["notationInHtml"]}
+		{!$item->notation}
+	{else}
+		{$item->notation}
+	{/if}
 </p>
 
 {/foreach}

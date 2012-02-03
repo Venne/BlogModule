@@ -1,32 +1,35 @@
 <?php
 
 /**
- * Venne:CMS (version 2.0-dev released on $WCDATE$)
+ * This file is part of the Venne:CMS (https://github.com/Venne)
  *
- * Copyright (c) 2011 Josef Kříž pepakriz@gmail.com
+ * Copyright (c) 2011, 2012 Josef Kříž (http://www.josef-kriz.cz)
  *
  * For the full copyright and license information, please view
  * the file license.txt that was distributed with this source code.
  */
 
-namespace App\BlogModule;
+namespace App\BlogModule\Forms;
 
-use Venne\ORM\Column;
-use Nette\Utils\Html;
-use Venne\Forms\Form;
+use Venne;
 
 /**
- * @author Josef Kříž
+ * @author Josef Kříž <pepakriz@gmail.com>
  */
-class BlogForm extends \App\PagesModule\PagesForm {
-
+class BlogForm extends \App\PagesModule\Forms\PagesForm {
 
 
 	public function startup()
 	{
 		$this->addGroup();
 		$this->addManyToMany("categories", "Categories");
-		$this->addTextArea("notation", "Notation");
+
+		if($this->presenter->context->parameters["modules"]["blog"]["notationInHtml"]){
+			$this->addEditor("notation", "Notation");
+		}else{
+			$this->addTextArea("notation", "Notation");
+		}
+
 		$this->setCurrentGroup();
 
 		parent::startup();

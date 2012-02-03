@@ -1,40 +1,24 @@
 <?php
 
+/**
+ * This file is part of the Venne:CMS (https://github.com/Venne)
+ *
+ * Copyright (c) 2011, 2012 Josef Kříž (http://www.josef-kriz.cz)
+ *
+ * For the full copyright and license information, please view
+ * the file license.txt that was distributed with this source code.
+ */
+
 namespace App\BlogModule;
 
-use Nette\Environment;
+use Venne;
 
 /**
- * @author Josef Kříž
- * 
+ * @author Josef Kříž <pepakriz@gmail.com>
+ *
  * @secured
  */
 class DefaultPresenter extends \Venne\Application\UI\PagePresenter {
 
-
-
-	/**
-	 * @privilege read
-	 */
-	public function startup()
-	{
-		parent::startup();
-
-		$this->template->entity = $this->context->blogRepository->findOneBy(array("page" => $this->page->id));
-
-		if (!$this->template->entity && !$this->url) {
-			$this->template->entity = $this->context->blogRepository->findOneBy(array("mainPage" => true));
-			if (!$this->template->entity) {
-				throw new \Nette\Application\BadRequestException;
-			}
-			$this->url = $this->template->entity->url;
-		}
-
-		if (!$this->template->entity) {
-			throw new \Nette\Application\BadRequestException;
-		}
-
-		$this->contentExtensionsKey = $this->template->entity->id;
-	}
 
 }

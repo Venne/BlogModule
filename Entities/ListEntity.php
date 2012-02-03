@@ -1,28 +1,30 @@
 <?php
 
 /**
- * Venne:CMS (version 2.0-dev released on $WCDATE$)
+ * This file is part of the Venne:CMS (https://github.com/Venne)
  *
- * Copyright (c) 2011 Josef Kříž pepakriz@gmail.com
+ * Copyright (c) 2011, 2012 Josef Kříž (http://www.josef-kriz.cz)
  *
  * For the full copyright and license information, please view
  * the file license.txt that was distributed with this source code.
  */
 
-namespace App\BlogModule;
+namespace App\BlogModule\Entities;
+
+use Venne;
 
 /**
- * @author Josef Kříž
+ * @author Josef Kříž <pepakriz@gmail.com>
  * @Entity(repositoryClass="\Venne\Doctrine\ORM\BaseRepository")
  * @Table(name="blogList")
- * 
+ *
  * @property $title
  * @property $text
  * @property $created
  * @property $updated
  * @property $url
  */
-class ListEntity extends \App\CoreModule\BasePageEntity {
+class ListEntity extends \App\CoreModule\Entities\BasePageEntity {
 
 
 	const LINK = "Blog:List:default";
@@ -30,9 +32,9 @@ class ListEntity extends \App\CoreModule\BasePageEntity {
 	/**
 	 * @ManyToMany(targetEntity="CategoryEntity", cascade={"all"})
 	 * @JoinTable(name="blogListLink",
-	 *      joinColumns={@JoinColumn(name="`from`", referencedColumnName="id", onDelete="CASCADE")},
-	 *      inverseJoinColumns={@JoinColumn(name="`to`", referencedColumnName="id", onDelete="CASCADE")}
-	 *      )
+	 *	  joinColumns={@JoinColumn(name="`from`", referencedColumnName="id", onDelete="CASCADE")},
+	 *	  inverseJoinColumns={@JoinColumn(name="`to`", referencedColumnName="id", onDelete="CASCADE")}
+	 *	  )
 	 */
 	protected $categories;
 

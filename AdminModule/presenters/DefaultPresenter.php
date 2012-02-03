@@ -1,23 +1,32 @@
 <?php
 
+/**
+ * This file is part of the Venne:CMS (https://github.com/Venne)
+ *
+ * Copyright (c) 2011, 2012 Josef Kříž (http://www.josef-kriz.cz)
+ *
+ * For the full copyright and license information, please view
+ * the file license.txt that was distributed with this source code.
+ */
+
 namespace App\BlogModule\AdminModule;
 
 use Nette\Forms\Form;
 use Nette\Web\Html;
 
 /**
- * @author Josef Kříž
- * 
+ * @author Josef Kříž <pepakriz@gmail.com>
+ *
  * @secured
  */
 class DefaultPresenter extends \Venne\Application\UI\AdminPresenter {
 
+
 	/** @persistent */
 	public $id;
-	
-	/**
-	 * @privilege read
-	 */
+
+
+
 	public function startup()
 	{
 		parent::startup();
@@ -42,16 +51,18 @@ class DefaultPresenter extends \Venne\Application\UI\AdminPresenter {
 
 	public function createComponentForm($name)
 	{
-		$repository = $this->context->blogCategoryRepository;
-		$entity = $this->context->blogCategoryRepository->createNew();
+		$repository = $this->context->blog->categoryRepository;
+		$entity = $repository->createNew();
 		$em = $this->context->entityManager;
-		
-		$form = new \App\BlogModule\CategoryForm($this->context->entityFormMapper, $em, $entity);
-		$form->setSuccessLink("default");
-		$form->setFlashMessage("Page has been created");
-		$form->setSubmitLabel("Create");
-		$form->onSave[] = function($form) use ($repository){
+
+		$form = $this->context->blog->createCategoryForm();
+		$form->setEntity($entity);
+		$form->addSubmit("_submit", "Save");
+		$form->onSuccess[] = function($form) use ($repository)
+		{
 			$repository->save($form->entity);
+			$form->presenter->flashMessage("Category has been created");
+			$form->presenter->redirect("default");
 		};
 		return $form;
 	}
@@ -60,36 +71,27 @@ class DefaultPresenter extends \Venne\Application\UI\AdminPresenter {
 
 	public function createComponentFormEdit($name)
 	{
-		$repository = $this->context->blogCategoryRepository;
-		$entity = $this->context->blogCategoryRepository->find($this->id);
+		$repository = $this->context->blog->categoryRepository;
+		$entity = $repository->find($this->id);
 		$em = $this->context->entityManager;
-		
-		$form = new \App\BlogModule\CategoryForm($this->context->entityFormMapper, $em, $entity);
-		$form->setSuccessLink("this");
-		$form->setFlashMessage("Page has been updated");
-		//$form->setSubmitLabel("Update");
-		$form->onSave[] = function($form) use ($repository){
+
+		$form = $this->context->blog->createCategoryForm();
+		$form->setEntity($entity);
+		$form->addSubmit("_submit", "Save");
+		$form->onSuccess[] = function($form) use ($repository)
+		{
 			$repository->save($form->entity);
+			$form->presenter->flashMessage("Category has been updated");
+			$form->presenter->redirect("this");
 		};
 		return $form;
 	}
 
 
 
-	public function beforeRender()
-	{
-		parent::beforeRender();
-		$this->setTitle("Venne:CMS | Blog administration");
-		$this->setKeywords("blog administration");
-		$this->setDescription("blog administration");
-		$this->setRobots(self::ROBOTS_NOINDEX | self::ROBOTS_NOFOLLOW);
-	}
-
-
-
 	public function handleDelete($id)
 	{
-		$this->context->blogCategoryRepository->delete($this->context->blogCategoryRepository->find($this->id));
+		$this->context->blog->categoryRepository->delete($this->context->blogCategoryRepository->find($this->id));
 		$this->flashMessage("Page has been deleted", "success");
 		$this->redirect("this", array("id" => NULL));
 	}
@@ -98,7 +100,7 @@ class DefaultPresenter extends \Venne\Application\UI\AdminPresenter {
 
 	public function renderDefault()
 	{
-		$this->template->table = $this->context->blogCategoryRepository->findAll();
+		$this->template->table = $this->context->blog->categoryRepository->findAll();
 	}
 
 }
