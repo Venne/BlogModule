@@ -32,8 +32,8 @@ class ListEntity extends \App\CoreModule\Entities\BasePageEntity {
 	/**
 	 * @ManyToMany(targetEntity="CategoryEntity", cascade={"all"})
 	 * @JoinTable(name="blogListLink",
-	 *	  joinColumns={@JoinColumn(name="`from`", referencedColumnName="id", onDelete="CASCADE")},
-	 *	  inverseJoinColumns={@JoinColumn(name="`to`", referencedColumnName="id", onDelete="CASCADE")}
+	 *	  joinColumns={@JoinColumn(name="list_id", referencedColumnName="id", onDelete="CASCADE")},
+	 *	  inverseJoinColumns={@JoinColumn(name="category_id", referencedColumnName="id", onDelete="CASCADE")}
 	 *	  )
 	 */
 	protected $categories;

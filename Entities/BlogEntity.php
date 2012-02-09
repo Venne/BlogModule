@@ -32,8 +32,8 @@ class BlogEntity extends \App\PagesModule\Entities\BaseEntity {
 	/**
 	 * @ManyToMany(targetEntity="CategoryEntity", cascade={"all"})
 	 * @JoinTable(name="blogCategoriesLink",
-	 *	  joinColumns={@JoinColumn(name="`from`", referencedColumnName="id", onDelete="CASCADE")},
-	 *	  inverseJoinColumns={@JoinColumn(name="`to`", referencedColumnName="id", onDelete="CASCADE")}
+	 *	  joinColumns={@JoinColumn(name="blog_id", referencedColumnName="id", onDelete="CASCADE")},
+	 *	  inverseJoinColumns={@JoinColumn(name="category_id", referencedColumnName="id", onDelete="CASCADE")}
 	 *	  )
 	 */
 	protected $categories;
