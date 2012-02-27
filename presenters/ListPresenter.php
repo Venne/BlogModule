@@ -18,7 +18,7 @@ use Venne;
  *
  * @secured
  */
-class ListPresenter extends \Venne\Application\UI\PagePresenter {
+class ListPresenter extends \App\CoreModule\Presenters\PagePresenter {
 
 
 

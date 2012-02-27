@@ -12,14 +12,13 @@
 namespace App\BlogModule\AdminModule;
 
 use Nette\Forms\Form;
-use Nette\Web\Html;
 
 /**
  * @author Josef Kříž <pepakriz@gmail.com>
  *
  * @secured
  */
-class DefaultPresenter extends \Venne\Application\UI\AdminPresenter {
+class DefaultPresenter extends \App\CoreModule\Presenters\AdminPresenter {
 
 
 	/** @persistent */
