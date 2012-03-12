@@ -39,20 +39,14 @@ class Module extends \Venne\Module\BaseModule
 
 		$manager = $container->core->cmsManager;
 
-		$manager->addContentType(Entities\BlogEntity::LINK, "blog entry", array("url"), function() use($container)
+		$manager->addContentType(Entities\BlogEntity::LINK, "blog entry", array("url"), $container->blog->blogRepository, function() use($container)
 		{
 			return $container->blog->createBlogForm();
-		}, function() use ($container)
-		{
-			return $container->blog->blogRepository->createNew();
 		});
 
-		$manager->addContentType(Entities\ListEntity::LINK, "blog list", array("url"), function() use($container)
+		$manager->addContentType(Entities\ListEntity::LINK, "blog list", array("url"), $container->blog->listRepository, function() use($container)
 		{
 			return $container->blog->createListForm();
-		}, function() use ($container)
-		{
-			return $container->blog->listRepository->createNew();
 		});
 	}
 
