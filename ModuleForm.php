@@ -9,14 +9,14 @@
  * the file license.txt that was distributed with this source code.
  */
 
-namespace App\BlogModule;
+namespace BlogModule;
 
 use Venne;
 
 /**
  * @author Josef Kříž <pepakriz@gmail.com>
  */
-class ModuleForm extends \App\CoreModule\Forms\ModuleForm
+class ModuleForm extends \CoreModule\Forms\ModuleForm
 {
 
 

@@ -9,7 +9,7 @@
  * the file license.txt that was distributed with this source code.
  */
 
-namespace App\BlogModule\Forms;
+namespace BlogModule\Forms;
 
 use Nette\Utils\Html;
 use Venne\Forms\Form;

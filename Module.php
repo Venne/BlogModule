@@ -9,9 +9,9 @@
  * the file license.txt that was distributed with this source code.
  */
 
-namespace App\BlogModule;
+namespace BlogModule;
 
-use App\CoreModule\NavigationEntity;
+use CoreModule\NavigationEntity;
 use Nette\DI\ContainerBuilder;
 use Nette\DI\Container;
 
@@ -54,7 +54,7 @@ class Module extends \Venne\Module\BaseModule
 
 	public function getForm(Container $container)
 	{
-		return new \App\BlogModule\ModuleForm($container->configFormMapper, $this->getName());
+		return new \BlogModule\ModuleForm($container->configFormMapper, $this->getName());
 	}
 
 }

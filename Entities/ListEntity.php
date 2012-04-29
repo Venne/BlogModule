@@ -9,7 +9,7 @@
  * the file license.txt that was distributed with this source code.
  */
 
-namespace App\BlogModule\Entities;
+namespace BlogModule\Entities;
 
 use Venne;
 
@@ -24,7 +24,7 @@ use Venne;
  * @property $updated
  * @property $url
  */
-class ListEntity extends \App\CoreModule\Entities\BasePageEntity {
+class ListEntity extends \CoreModule\Entities\BasePageEntity {
 
 
 	const LINK = "Blog:List:default";

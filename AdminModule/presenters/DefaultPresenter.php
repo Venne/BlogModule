@@ -9,7 +9,7 @@
  * the file license.txt that was distributed with this source code.
  */
 
-namespace App\BlogModule\AdminModule;
+namespace BlogModule\AdminModule;
 
 use Nette\Forms\Form;
 
@@ -18,7 +18,7 @@ use Nette\Forms\Form;
  *
  * @secured
  */
-class DefaultPresenter extends \App\CoreModule\Presenters\AdminPresenter {
+class DefaultPresenter extends \CoreModule\Presenters\AdminPresenter {
 
 
 	/** @persistent */

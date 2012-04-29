@@ -10,12 +10,12 @@
  * the file license.txt that was distributed with this source code.
  */
 
-namespace App\BlogModule\Subscribers;
+namespace BlogModule\Subscribers;
 
 use Doctrine\Common\EventSubscriber;
-use App\CoreModule\Events\AdminEvents;
-use App\CoreModule\Events\AdminEventArgs;
-use App\CoreModule\Entities\NavigationEntity;
+use CoreModule\Events\AdminEvents;
+use CoreModule\Events\AdminEventArgs;
+use CoreModule\Entities\NavigationEntity;
 
 /**
  * @author Josef Kříž <pepakriz@gmail.com>

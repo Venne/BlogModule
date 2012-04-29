@@ -9,7 +9,7 @@
  * the file license.txt that was distributed with this source code.
  */
 
-namespace App\BlogModule\Entities;
+namespace BlogModule\Entities;
 
 use Venne;
 
@@ -22,12 +22,12 @@ class CategoryEntity extends \Venne\Doctrine\ORM\NamedEntity {
 
 
 	/**
-	 * @OneToMany(targetEntity="categoryEntity", mappedBy="parent", cascade={"persist", "remove"}, orphanRemoval=true)
+	 * @OneToMany(targetEntity="CategoryEntity", mappedBy="parent", cascade={"persist", "remove"}, orphanRemoval=true)
 	 */
 	protected $childrens;
 
 	/**
-	 * @ManyToOne(targetEntity="categoryEntity", inversedBy="id", cascade={"persist", "remove"})
+	 * @ManyToOne(targetEntity="CategoryEntity", inversedBy="id", cascade={"persist", "remove"})
 	 * @JoinColumn(name="category_id", referencedColumnName="id", onDelete="CASCADE")
 	 */
 	protected $parent;

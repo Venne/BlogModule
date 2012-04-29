@@ -9,7 +9,7 @@
  * the file license.txt that was distributed with this source code.
  */
 
-namespace App\BlogModule;
+namespace BlogModule;
 
 use Venne;
 
@@ -18,7 +18,7 @@ use Venne;
  *
  * @secured
  */
-class ListPresenter extends \App\CoreModule\Presenters\PagePresenter {
+class ListPresenter extends \CoreModule\Presenters\PagePresenter {
 
 
 
